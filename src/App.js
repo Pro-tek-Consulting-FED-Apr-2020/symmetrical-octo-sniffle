@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Dropdown from './Dropdown'
+import TodoApp from './ToDoList'
 
 function Button(props){
   return(
@@ -24,7 +25,7 @@ class App extends React.Component {
   <br></br>
   <br></br>
 
-<Dropdown url={'http://www.google.com/'} data={data}/> 
+<TodoApp />
     </div>
   );
 }
