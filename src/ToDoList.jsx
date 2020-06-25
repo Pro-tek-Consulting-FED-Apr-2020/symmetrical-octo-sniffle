@@ -19,13 +19,8 @@ const TodoForm = ({ addTodo }) => {
   let input;
   // Return JSX
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        addTodo(input.value);
-        input.value = "";
-      }}
-    >
+    <div>
+    
       <input
         className="form-control col-md-12"
         ref={(node) => {
@@ -33,7 +28,13 @@ const TodoForm = ({ addTodo }) => {
         }}
       />
       <br />
-    </form>
+     <button  onClick={(e) => {
+        e.preventDefault();
+        let input= document.getElementsByClassName("form-control")[0];
+        addTodo(input.value);
+        input.value = "";
+      }} data-testid={'submitBtn'}>Submit</button>
+    </div>
   );
 };
 
@@ -46,6 +47,7 @@ const Todo = ({ todo, remove }) => {
       onClick={() => {
         remove(todo.id);
       }}
+      data-testid={window.id}
     >
       {todo.text}
     </li>
@@ -57,7 +59,6 @@ const TodoList = ({ todos, remove }) => {
   const todoNode = todos.map((todo) => {
     return <Todo todo={todo} key={todo.id} remove={remove} />;
   });
-  console.log(">>>",todoNode);
   return (
     <ul className="list-group" style={{ marginTop: "30px" }}>
       {todoNode}
@@ -94,9 +95,6 @@ class TodoApp extends React.Component {
     // Filter all todos except the one to be removed
     const remainder = this.state.data.filter((todo) => {
       if (todo.id !== id) return todo;
-      else {
-        return null;
-      }
     });
     // Update state with filter
 
